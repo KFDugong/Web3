@@ -1,0 +1,114 @@
+// First "read" test -> UserServices.getUsers()
+// Rufe alle User ab. Zu Beginn sollten keine User in der Datenbank sein. 
+###
+GET http://localhost/api/publicUsers
+
+// First "create" test -> UserService.createUser()
+// Lege ersten User an, der Administrator ist
+###
+POST http://localhost/api/publicUsers
+Content-Type: application/json
+
+{
+    "userID": "admin",
+    "firstName": "Udo",
+    "lastName": "Müller",
+    "password": "123",
+    "isAdministrator": true
+}
+
+// Custom "create" test -> UserService.createUser()
+// Lege einen zweiten User an
+###
+POST http://localhost/api/publicUsers
+Content-Type: application/json
+
+{
+    "userID": "testuser",
+    "firstName": "Cobra",
+    "lastName": "Heinrich",
+    "password": "91232452",
+    "isAdministrator": false
+}
+
+// Custom "create" test -> UserService.createUser() with missing required properties
+###
+POST http://localhost/api/publicUsers
+Content-Type: application/json
+
+{
+    "lastName": "",
+    "isAdministrator": false
+}
+
+
+
+// Custom "Create" test without admin property -> UserService.createUser()
+// Lege dritten User an. Prüfe UserID sowie den Namen, ob die Angaben korrekt sind.
+###
+POST http://localhost/api/publicUsers
+Content-Type: application/json
+
+{
+    "userID": "manfred",
+    "firstName": "Susi",
+    "lastName": "Sunkissed",
+    "password": "asdf"
+}
+
+// "Read" One test -> UserService.findUserByID()
+// Rufe den User mit UserID admin ab. 
+###
+GET http://localhost/api/publicUsers/admin
+
+// "Read" test -> UserService.findUserByID() with missing userID
+// Expected error
+###
+GET http://localhost/api/publicUsers/klabautermann
+
+// "Update" test -> UserService.updateUser() -> correct usage of the method
+// Ändere beim zweiten User den User-Name. Zur Selektion des Users verwende die userID.
+###
+PUT http://localhost/api/publicUsers/manfred
+Content-Type: application/json
+
+{
+    "firstName": "Marina",
+    "lastName": "Sauerbier"
+}
+
+// "Update" test -> UserServie.updateUser() with password property -> password needs to get hashed once again
+###
+PUT http://localhost/api/publicUsers/admin
+Content-Type: application/json
+
+{
+    "password": "ksyfnweofinawef"
+}
+
+// "Update" test -> UserService.updateUser() on a nonexistant userID 
+// expected error
+###
+PUT http://localhost/api/publicUsers/larry
+Content-Type: application/json
+
+{
+    "firstName": "Larry",
+    "lastName": "der Hummer"
+}
+
+// "Read" all 
+// Rufe alle User ab. Es sollten 2 User zurückgegeben werden.
+###
+GET http://localhost/api/publicUsers
+
+
+// "Delete" tests -> UserService.deleteUser() working as usual
+// Lösche den User mit der User-ID manfred
+###
+DELETE  http://localhost/api/publicUsers/manfred
+
+
+// Lösche einen nicht existierenden User
+###
+DELETE http://localhost/api/publicUsers/benjamin

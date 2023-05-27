@@ -1,0 +1,152 @@
+###
+GET http://localhost:80/api/publicUsers
+
+###
+GET http://localhost:80/api/authenticate
+Authorization: Basic YWRtaW46MTIz
+
+###
+GET http://localhost:80/api/authenticate
+Authorization: Basic YXNkZjphc2Rm
+
+###
+GET http://localhost:80/api/users
+
+###
+GET http://localhost:80/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNBZG1pbmlzdHJhdG9yIjp0cnVlLCJpYXQiOjE2NjkwNTIyNzcsImV4cCI6MTY2OTA1Mjc3N30.UHkfujxboAHho9Dhae0_8khnBj_TM2xNLg_R-gf7VcY
+
+###
+GET http://localhost:80/api/users/admin
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNBZG1pbmlzdHJhdG9yIjp0cnVlLCJpYXQiOjE2NjkwNTIyNzcsImV4cCI6MTY2OTA1Mjc3N30.UHkfujxboAHho9Dhae0_8khnBj_TM2xNLg_R-gf7VcY
+
+###
+POST http://localhost:80/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNBZG1pbmlzdHJhdG9yIjp0cnVlLCJpYXQiOjE2NjkwNTIyNzcsImV4cCI6MTY2OTA1Mjc3N30.UHkfujxboAHho9Dhae0_8khnBj_TM2xNLg_R-gf7VcY
+Content-Type application/json
+{
+"firstName" : "Udo",
+"lastName" : "Müller",
+"password" : "123",
+"isAdministrator" : true,
+"userID" : "admin"
+}
+
+###
+POST http://localhost:80/api/users
+Content-Type application/json
+{
+"firstName" : "Manfred",
+"lastName" : "Mustermann",
+"password" : "asdf",
+"isAdministrator" : false,
+"userID" : "manfred"
+}
+
+###
+POST http://localhost:80/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNBZG1pbmlzdHJhdG9yIjp0cnVlLCJpYXQiOjE2NjkwNTIyNzcsImV4cCI6MTY2OTA1Mjc3N30.UHkfujxboAHho9Dhae0_8khnBj_TM2xNLg_R-gf7VcY
+Content-Type application/json
+{
+"firstName" : "Manfred",
+"lastName" : "Mustermann",
+"password" : "asdf",
+"isAdministrator" : false,
+"userID" : "manfred"
+}
+
+###
+GET http://localhost:80/api/users/manfred
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNBZG1pbmlzdHJhdG9yIjp0cnVlLCJpYXQiOjE2NjkwNTIyNzcsImV4cCI6MTY2OTA1Mjc3N30.UHkfujxboAHho9Dhae0_8khnBj_TM2xNLg_R-gf7VcY
+
+###
+GET http://localhost:80/api/authenticate
+Authorization: Basic bWFuZnJlZDphc2Rm
+
+###
+PUT http://localhost:80/api/users/manfred
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNBZG1pbmlzdHJhdG9yIjp0cnVlLCJpYXQiOjE2NjkwNTIyNzcsImV4cCI6MTY2OTA1Mjc3N30.UHkfujxboAHho9Dhae0_8khnBj_TM2xNLg_R-gf7VcY
+Content-Type application/json
+{
+"password" : "aaa"
+}
+
+###
+GET http://localhost:80/api/authenticate
+Authorization: Basic bWFuZnJlZDphYWE=
+
+###
+GET http://localhost:80/api/degreeCourses
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNBZG1pbmlzdHJhdG9yIjp0cnVlLCJpYXQiOjE2NjkwNTIyNzcsImV4cCI6MTY2OTA1Mjc3N30.UHkfujxboAHho9Dhae0_8khnBj_TM2xNLg_R-gf7VcY
+
+###
+POST http://localhost:80/api/degreeCourses
+Content-Type application/json
+{
+"universityName" : "Berliner Hochschule für Technik",
+"universityShortName" : "BHT",
+"departmentName" : "Informatik und Medien",
+"departmentShortName" : "FB VI",
+"name" : "Orchideenzucht Bachelor",
+"shortName" : "OZ-BA"
+}
+
+POST http://localhost:80/api/degreeCourses
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNBZG1pbmlzdHJhdG9yIjp0cnVlLCJpYXQiOjE2NjkwNTIyNzcsImV4cCI6MTY2OTA1Mjc3N30.UHkfujxboAHho9Dhae0_8khnBj_TM2xNLg_R-gf7VcY
+Content-Type application/json
+{
+"universityName" : "Berliner Hochschule für Technik",
+"universityShortName" : "BHT",
+"departmentName" : "Informatik und Medien",
+"departmentShortName" : "FB VI",
+"name" : "Orchideenzucht Bachelor",
+"shortName" : "OZ-BA"
+}
+
+###
+GET http://localhost:80/api/degreeCourses/637bb777200c38a75cf197d2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNBZG1pbmlzdHJhdG9yIjp0cnVlLCJpYXQiOjE2NjkwNTIyNzcsImV4cCI6MTY2OTA1Mjc3N30.UHkfujxboAHho9Dhae0_8khnBj_TM2xNLg_R-gf7VcY
+
+###
+PUT http://localhost:80/api/degreeCourses/637bb777200c38a75cf197d2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNBZG1pbmlzdHJhdG9yIjp0cnVlLCJpYXQiOjE2NjkwNTIyNzcsImV4cCI6MTY2OTA1Mjc3N30.UHkfujxboAHho9Dhae0_8khnBj_TM2xNLg_R-gf7VcY
+Content-Type application/json
+{
+"name" : "Tuplenzucht Bachelor"
+}
+
+###
+Gesendete Anfrage an den Server:
+GET http://localhost:80/api/degreeCourses?universityShortName=BHT
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNBZG1pbmlzdHJhdG9yIjp0cnVlLCJpYXQiOjE2NjkwNTIyNzcsImV4cCI6MTY2OTA1Mjc3N30.UHkfujxboAHho9Dhae0_8khnBj_TM2xNLg_R-gf7VcY
+
+###
+DELETE http://localhost:80/api/degreeCourses/637bb777200c38a75cf197d2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNBZG1pbmlzdHJhdG9yIjp0cnVlLCJpYXQiOjE2NjkwNTIyNzcsImV4cCI6MTY2OTA1Mjc3N30.UHkfujxboAHho9Dhae0_8khnBj_TM2xNLg_R-gf7VcY
+
+###
+GET http://localhost:80/api/users/asdfasdf
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNBZG1pbmlzdHJhdG9yIjp0cnVlLCJpYXQiOjE2NjkwNTIyNzcsImV4cCI6MTY2OTA1Mjc3N30.UHkfujxboAHho9Dhae0_8khnBj_TM2xNLg_R-gf7VcY
+
+###
+DELETE http://localhost:80/api/users/manfred
+
+###
+DELETE http://localhost:80/api/users/manfred
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNBZG1pbmlzdHJhdG9yIjp0cnVlLCJpYXQiOjE2NjkwNTIyNzcsImV4cCI6MTY2OTA1Mjc3N30.UHkfujxboAHho9Dhae0_8khnBj_TM2xNLg_R-gf7VcY
+
+###
+GET http://localhost:80/api/users/manfred
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNBZG1pbmlzdHJhdG9yIjp0cnVlLCJpYXQiOjE2NjkwNTIyNzcsImV4cCI6MTY2OTA1Mjc3N30.UHkfujxboAHho9Dhae0_8khnBj_TM2xNLg_R-gf7VcY
+
+###
+DELETE http://localhost:80/api/users/asdfasdf
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNBZG1pbmlzdHJhdG9yIjp0cnVlLCJpYXQiOjE2NjkwNTIyNzcsImV4cCI6MTY2OTA1Mjc3N30.UHkfujxboAHho9Dhae0_8khnBj_TM2xNLg_R-gf7VcY
+
+###
+PUT http://localhost:80/api/users/asdfasdf
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNBZG1pbmlzdHJhdG9yIjp0cnVlLCJpYXQiOjE2NjkwNTIyNzcsImV4cCI6MTY2OTA1Mjc3N30.UHkfujxboAHho9Dhae0_8khnBj_TM2xNLg_R-gf7VcY
+Content-Type application/json
+{
+"password" : "aaa"
+}

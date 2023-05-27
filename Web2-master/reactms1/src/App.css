@@ -1,0 +1,355 @@
+.App {
+  text-align: center;
+}
+
+
+/* Page Layout */
+
+.page-layout {
+  display: grid;
+  grid:
+    "header header header" auto "leftSide body . " 1fr ". . . " auto / auto 1fr auto;
+}
+
+.top-menu {
+  grid-area: header;
+}
+
+.side-bar {
+  grid-area: leftSide;
+  background: linear-gradient(to right, #868f96 0%, #596164 100%);
+
+  height: 100%;
+}
+
+.sidebar-items {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+}
+
+.main-content {
+  grid-area: body;
+  background: linear-gradient(180.3deg, rgb(221, 221, 221) 5.5%, rgb(110, 136, 161) 90.2%);
+  display: flex;
+  flex-direction: column;
+}
+
+.hero {
+  background-image: url('./assets/images/Bewerbungsportal.png');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.hero-heading h2 {
+  padding: 2%;
+  font-size: xx-large;
+  font-weight: bold;
+}
+
+.hero-paragraph {
+  padding: 3%;
+  margin: 2%;
+  background-color: rgba(0, 0, 0, 0.7);
+  margin-top: 5%;
+  display: flex;
+  color: rgba(255, 255, 255, 0.8);
+  flex-direction: row;
+  gap: 10%;
+  font-weight: bold;
+}
+
+.private-hero {
+  background-image: url("./assets/images/Logged.png");
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
+}
+
+.private-hero-heading h1 {
+  padding-top: 2%;
+  font-weight: bolder;
+}
+
+.private-hero-paragraph {
+  padding: 3%;
+  margin: 2%;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-weight: bold;
+}
+
+.private-hero-paragraph span {
+  font-size: x-large;
+  font-weight: bolder;
+}
+
+
+.user-card {
+  padding: 2.75rem;
+  display: flex;
+  flex-direction: row;
+  align-items: initial;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 2rem;
+}
+
+.userlist-heading {
+  font-weight: bold;
+  text-decoration: underline;
+
+}
+
+.usercard-heading {
+  display: flex;
+  margin-top: 2%;
+  padding-left: 5%;
+  padding-right: 5%;
+  justify-content: space-between;
+}
+
+.user-card-btn {
+  display: flex;
+  justify-content: center;
+  gap: 50%;
+}
+
+.degree-card-btn {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.single-user span {
+  font-weight: bold;
+}
+
+.single-user {
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+}
+
+.create-user-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-user-form label {
+  margin: 5px;
+}
+
+.create-user-form input {
+  margin: 5px;
+}
+
+.sidebar-button {
+  margin: 0.5rem;
+  padding: 1rem;
+  /* width: 140px;
+  height: 45px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500; */
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+.sidebar-button:hover {
+  background-color: #B7B7B7;
+  box-shadow: 0px 15px 20px rgba(255, 255, 255, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+
+/* Create Button */
+.button-16 {
+  max-width: fit-content;
+  background-color: #0e762f;
+  border-radius: 12px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-weight: bold;
+  padding: 10px 15px;
+  text-align: center;
+  transition: 200ms;
+  width: 100%;
+  box-sizing: border-box;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-16:not(:disabled):hover,
+.button-16:not(:disabled):focus {
+  outline: 0;
+  background: #0e762f;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, .2), 0 3px 8px 0 rgba(0, 0, 0, .15);
+}
+
+.button-16:disabled {
+  filter: saturate(0.2) opacity(0.5);
+  -webkit-filter: saturate(0.2) opacity(0.5);
+  cursor: not-allowed;
+}
+
+
+.form-btn-wrapper {
+  display: flex;
+  padding-top: 5%;
+  justify-content: space-between;
+}
+
+/* Create Btn in form */
+.button-81 {
+  background-color: #fff;
+  border: 0 solid #e2e8f0;
+  border-radius: 1.5rem;
+  box-sizing: border-box;
+  color: #0d172a;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Basier circle", -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 1rem 1.6rem;
+  text-align: center;
+  text-decoration: none #0d172a solid;
+  text-decoration-thickness: auto;
+  transition: all .1s cubic-bezier(.4, 0, .2, 1);
+  box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-81:hover {
+  background-color: #156717;
+  color: #fff;
+}
+
+@media (min-width: 768px) {
+  .button-81 {
+    font-size: 1.125rem;
+    padding: 1rem 2rem;
+  }
+}
+
+.button-32 {
+  background-color: #fff;
+  border: 0 solid #e2e8f0;
+  border-radius: 1.5rem;
+  box-sizing: border-box;
+  color: #0d172a;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Basier circle", -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 1rem 1.6rem;
+  text-align: center;
+  text-decoration: none #0d172a solid;
+  text-decoration-thickness: auto;
+  transition: all .1s cubic-bezier(.4, 0, .2, 1);
+  box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-32:hover {
+  background-color: #ffc107;
+  color: #fff;
+}
+
+
+/* CSS */
+.button-24 {
+  background-color: #fff;
+  border: 0 solid #e2e8f0;
+  border-radius: 1.5rem;
+  box-sizing: border-box;
+  color: #0d172a;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Basier circle", -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 1rem 1.6rem;
+  text-align: center;
+  text-decoration: none #0d172a solid;
+  text-decoration-thickness: auto;
+  transition: all .1s cubic-bezier(.4, 0, .2, 1);
+  box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-24:hover {
+  background-color: #b61a1a;
+  color: #fff;
+}
+
+.searchOption {
+  margin: 1.5rem;
+  display: flex;
+  justify-content: space-around;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  box-shadow: 0px -23px 25px 0px rgba(0, 0, 0, 0.17) inset, 0px -36px 30px 0px rgba(0, 0, 0, 0.15) inset, 0px -79px 40px 0px rgba(0, 0, 0, 0.1) inset, 0px 2px 1px rgba(0, 0, 0, 0.06), 0px 4px 2px rgba(0, 0, 0, 0.09), 0px 8px 4px rgba(0, 0, 0, 0.09), 0px 16px 8px rgba(0, 0, 0, 0.09);
+
+
+}
+
+.searchCheckbox {
+  display: flex;
+  gap: 10px;
+  font-size: larger;
+  font-weight: bold;
+}
+
+.searchBar {
+  display: flex;
+  justify-content: center;
+  height: 30%;
+}
+
+.searchBar select {
+  border: 3px solid #123785;
+  border-radius: 5px 0 0 5px;
+}
+
+.searchTerm {
+  border: 3px solid #123785;
+  padding: 5px;
+  outline: none;
+}
+
+.searchButton {
+  border: 3px solid #123785;
+  background: #123785;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}

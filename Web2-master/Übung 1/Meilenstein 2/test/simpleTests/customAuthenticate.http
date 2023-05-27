@@ -1,0 +1,308 @@
+
+// =============================================//
+//              User Routen Test                //
+// =============================================//
+
+
+// Login mit Basic Authentication als admin mit korrekten Credentials admin:123
+###
+# @name loginAdminCorrect
+GET http://localhost/api/authenticate
+Authorization: Basic YWRtaW46MTIz
+
+// Testen, ob "isAdministrator": false ist, beim User manfred -> Soll false sein
+###
+GET http://localhost/api/authenticate
+Authorization: Basic bWFuZnJlZDphc2Rm
+
+// Login mit Basic Authentication als admin mit falschen Credentials
+// Hinweis: Der REST-Client überführt das Passwort automatisch nach Base64
+###
+GET http://localhost/api/authenticate
+Authorization: Basic admin:asdf
+
+@adminToken = {{loginAdminCorrect.response.headers.Authorization}}
+
+### Auflisten aller Nutzer, ohne dass ein Token übergeben wird --> Anfrage scheitert mit 401 
+http://localhost/api/users
+
+### Auflisten aller Nutzer mit Token von admin
+http://localhost/api/users
+Authorization: {{adminToken}}
+
+### Lege neuen user manfred an
+POST http://localhost/api/users
+Authorization: {{adminToken}}
+Content-Type: application/json
+
+{
+    "userID": "manfred",
+    "firstName": "Manfred",
+    "lastName": "Mustermann",
+    "password": "asdf"
+}
+
+### Abrufen des angelegten Users mit dem Admin-Token
+GET http://localhost/api/users/manfred
+Authorization: {{adminToken}}
+
+### 
+GET http://localhost/api/users/admin
+Authorization: {{adminToken}}
+// Ändere beim zweiten User den User-Name. Zur Selektion des Users verwende die userID.
+###
+PUT http://localhost/api/users/manfred
+Content-Type: application/json
+Authorization: {{adminToken}}
+
+{
+    "firstName": "Sandra",
+    "lastName": "Meier"
+}
+
+// Login mit Basic Authentication als manfred mit korrekten Credentials
+###
+# @name loginManfredCorrect
+GET http://localhost/api/authenticate
+Authorization: Basic manfred:asdf
+
+@manfredToken = {{loginManfredCorrect.response.headers.Authorization}}
+
+### Auflisten aller Nutzer mit Token von manfred, das sollte nicht möglich sein
+GET http://localhost/api/users
+Authorization: {{manfredToken}}
+
+// Auflisten von testuser, der nicht dieselben Credentials hat -> soll ein error spucken
+###
+GET http://localhost/api/users/testuser
+Authorization: {{manfredToken}}
+
+//Auflisten von manfred, mit denselben Credentials -> soll funktionieren
+###
+GET http://localhost/api/users/manfred
+Authorization: {{manfredToken}}
+
+// Auflisten von manfred mit adminToken -> soll funktionieren
+###
+GET http://localhost/api/users/manfred
+Authorization: {{adminToken}}
+
+// Auflisten von testuser mit adminToken -> soll funktionieren
+###
+GET http://localhost/api/users/testuser
+Authorization: {{adminToken}}
+
+
+// Update mit adminToken -> soll funktionieren
+###
+PUT http://localhost/api/users/manfred
+Content-Type: application/json
+Authorization: {{adminToken}}
+
+{
+    "firstName": "Sandra",
+    "lastName": "Meier"
+}
+
+// Update von manfred mit manfredToken -> soll funktionieren
+###
+PUT http://localhost/api/users/manfred
+Content-Type: application/json
+Authorization: {{manfredToken}}
+
+{
+    "firstName": "Vasiliki",
+    "lastName": "Web2"
+}
+
+// Update von testuser mit manfredToken -> soll error spucken
+###
+PUT http://localhost/api/users/testuser
+Content-Type: application/json
+Authorization: {{manfredToken}}
+
+{
+    "firstName": "Abgabe",
+    "lastName": "Meilenstein2"
+}
+
+// Update von testuser mit adminToken -> soll funktionieren
+###
+PUT http://localhost/api/users/testuser
+Content-Type: application/json
+Authorization: {{adminToken}}
+
+{
+    "firstName": "Abgabe",
+    "lastName": "Meilenstein2"
+}
+
+### Lösche den User manfred
+DELETE http://localhost/api/users/manfred
+Authorization: {{adminToken}}
+
+### Lösche den User manfred
+DELETE http://localhost/api/users/manfred
+Authorization: {{manfredToken}}
+
+### Lösche den User testuser
+DELETE http://localhost/api/users/testuser
+Authorization: {{manfredToken}}
+
+
+// =============================================//
+//              Studiengangstest                //
+// =============================================//
+
+
+// Soll am Anfang ein leeres Array zurückgeben
+### Auflisten aller Studiengänge
+GET http://localhost/api/degreeCourses
+Authorization: {{adminToken}}
+
+// Lege einen Studiengang an
+###
+# @name createDegreeCourseRequest
+POST http://127.0.0.1/api/degreeCourses
+Authorization: {{adminToken}}
+Content-Type: application/json
+
+{
+    "universityName": "Beuth Hochschule für Technik Berlin",
+    "universityShortName": "Beuth HS",
+    "departmentName": "Informatik und Medien",
+    "departmentShortName": "FB VI",
+    "name": "Orchideenzucht Bachelor",
+    "shortName": "OZ-BA"
+}
+
+###
+POST http://127.0.0.1/api/degreeCourses
+Authorization: {{adminToken}}
+Content-Type: application/json
+
+{
+    "universityName": "Beuth Hochschule für Technik Berlin",
+    "universityShortName": "Beuth HS",
+    "departmentName": "Mathematik",
+    "departmentShortName": "FB V",
+    "name": "Techno Mathe",
+    "shortName": "TM"
+}
+
+###
+POST http://127.0.0.1/api/degreeCourses
+Authorization: {{adminToken}}
+Content-Type: application/json
+
+{
+    "universityName": "Beuth Hochschule für Technik Berlin",
+    "universityShortName": "Beuth HS",
+    "departmentName": "Mathematik",
+    "departmentShortName": "FB V",
+    "name": "Hasbulla and Math",
+    "shortName": "H&M"
+}
+
+###
+POST http://localhost/api/degreeCourses
+Authorization: {{adminToken}}
+Content-Type: application/json
+
+{
+    "universityName": "Technische Universität Berlin",
+    "universityShortName": "TUB",
+    "departmentName": "Informatik und Medien",
+    "departmentShortName": "FB VI",
+    "name": "Medieninformatik",
+    "shortName": "OZ-BA"
+}
+
+###
+POST http://localhost/api/degreeCourses
+Authorization: {{adminToken}}
+Content-Type: application/json
+
+{
+    "universityName": "Technische Universität Berlin",
+    "universityShortName": "TUB",
+    "departmentName": "Prozesstechnik",
+    "departmentShortName": "FB VI",
+    "name": "Energie- und Prozesstechnik",
+    "shortName": "EPT-BA"
+}
+
+###
+POST http://localhost/api/degreeCourses
+Authorization: {{adminToken}}
+Content-Type: application/json
+
+{
+    "universityName": "Technische Universität Berlin",
+    "universityShortName": "TUB",
+    "departmentName": "History Channel",
+    "departmentShortName": "FB VII",
+    "name": "Geschichte",
+    "shortName": "G"
+}
+
+###
+POST http://localhost/api/degreeCourses
+Authorization: {{adminToken}}
+Content-Type: application/json
+
+{
+    "universityName": "Freie Universität Berlin",
+    "universityShortName": "FUB",
+    "departmentName": "The way of life",
+    "departmentShortName": "FB VI",
+    "name": "Cooking with Mr. White",
+    "shortName": "BB"
+}
+
+
+### Auflisten der Studiengänge einer bestimmten Hochschule
+GET http://localhost/api/degreeCourses?universityShortName=Beuth HS
+
+###
+GET http://localhost/api/degreeCourses?universityShortName=FUB
+Authorization: {{adminToken}}
+
+###
+GET http://localhost/api/degreeCourses?universityShortName=TUB
+Authorization: {{manfredToken}}
+###
+GET http://localhost/api/degreeCourses?departmentShortName=FB VI&universityShortName=TUB
+Authorization: {{adminToken}}
+
+
+
+###
+@degreeCourseID = {{createDegreeCourseRequest.response.body._id}}
+
+### Auflisten aller Studiengänge, es sollte jetzt einen geben
+http://localhost/api/degreeCourses
+Authorization: {{adminToken}}
+
+### Abrufen von dem angelegten Studiengang
+http://localhost/api/degreeCourses/{{degreeCourseID}}
+Authorization: {{adminToken}}
+
+
+### Ändere den Namen des Studiengangs
+PUT http://localhost/api/degreeCourses/{{degreeCourseID}}
+Authorization: {{adminToken}}
+Content-Type: application/json
+
+{
+    "name": "Tulpenzucht"
+}
+
+
+### Lösche den angelegten Studiengang
+DELETE http://localhost/api/degreeCourses/{{degreeCourseID}}
+Authorization: {{adminToken}}
+
+### Lösche den User manfred
+DELETE http://localhost/api/users/manfred
+Authorization: {{adminToken}}

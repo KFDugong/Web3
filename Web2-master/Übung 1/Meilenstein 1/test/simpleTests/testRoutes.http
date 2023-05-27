@@ -1,0 +1,50 @@
+// Rufe alle User ab. Zu Beginn sollten keine User in der Datenbank sein. 
+###
+GET http://localhost/api/publicUsers
+
+// Lege ersten User an, der Administrator ist
+###
+POST http://localhost/api/publicUsers
+Content-Type: application/json
+
+{
+    "userID": "admin",
+    "firstName": "Udo",
+    "lastName": "Müller",
+    "password": "123",
+    "isAdministrator": true
+}
+
+// Rufe den User mit UserID admin ab. 
+###
+GET http://localhost/api/publicUsers/admin
+
+// Lege zweiten User an. Prüfe UserID sowie den Namen, ob die Angaben korrekt sind.
+###
+POST http://localhost/api/publicUsers
+Content-Type: application/json
+
+{
+    "userID": "manfred",
+    "firstName": "Susi",
+    "lastName": "Sunkist",
+    "password": "asdf"
+}
+
+// Ändere beim zweiten User den User-Name. Zur Selektion des Users verwende die userID.
+###
+PUT http://localhost/api/publicUsers/manfred
+Content-Type: application/json
+
+{
+    "firstName": "Marina",
+    "lastName": "Sauerbier"
+}
+
+// Rufe alle User ab. Es sollten 2 User zurückgegeben werden.
+###
+GET http://localhost/api/publicUsers
+
+// Lösche den User mit der User-ID manfred
+###
+DELETE  http://localhost/api/publicUsers/manfred

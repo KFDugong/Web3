@@ -1,0 +1,73 @@
+###
+GET http://localhost:80/api/publicUsers
+
+###
+POST http://localhost:80/api/publicUsers
+Content-Type application/json
+{
+"firstName" : "Udo",
+"lastName" : "Meyer",
+"password" : "123",
+"isAdministrator" : true,
+"userID" : "admin"
+}
+
+###
+GET http://localhost:80/api/publicUsers
+
+###
+GET http://localhost:80/api/publicUsers/admin
+
+###
+POST http://localhost:80/api/publicUsers
+Content-Type application/json
+{
+"firstName" : "Udo",
+"lastName" : "Meyer",
+"password" : "123",
+"isAdministrator" : true,
+"userID" : "admin"
+}
+
+###
+POST http://localhost:80/api/publicUsers
+Content-Type application/json
+{
+"firstName" : "Manfred",
+"lastName" : "Mustermann",
+"password" : "asdf",
+"isAdministrator" : false,
+"userID" : "manfred"
+}
+
+###
+GET http://localhost:80/api/publicUsers/manfred
+
+###
+PUT http://localhost:80/api/publicUsers/manfred
+Content-Type application/json
+{
+"firstName" : "Susi Sunkist"
+}
+
+###
+GET http://localhost:80/api/publicUsers/asdfasdf
+
+###
+DELETE http://localhost:80/api/publicUsers/manfred
+
+###
+GET http://localhost:80/api/publicUsers/manfred
+
+###
+DELETE http://localhost:80/api/publicUsers/asdfasdf
+
+###
+PUT http://localhost:80/api/publicUsers/asdfasdf
+Content-Type application/json
+{
+"firstName" : "Susi Sunkist"
+}
+
+###
+GET http://localhost:80/api/blumentopf/asdf

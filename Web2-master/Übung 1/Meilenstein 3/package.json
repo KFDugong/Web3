@@ -1,0 +1,23 @@
+{
+  "name": "meilenstein1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./httpServer.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kelvin",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.1",
+    "config": "^3.3.8",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.6.6",
+    "validator": "^13.7.0"
+  }
+}

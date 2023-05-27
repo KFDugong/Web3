@@ -1,0 +1,13 @@
+{
+    "session": {
+        "tokenKey": "djghhhhuuwiwuewieuwieuriwu",
+        "timeout": 300
+    },
+    "db": {
+        "dbConfigOptions": {
+            "useNewUrlParser": true,
+            "useUnifiedTopology": true
+        },
+        "connectionString": "mongodb://localhost/WE2DB"
+    }
+}
