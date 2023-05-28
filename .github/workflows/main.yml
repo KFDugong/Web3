@@ -8,8 +8,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    env:
-      MONGODB_CONNECTION_STRING: ${{ secrets.MONGODB_CONNECTION_STRING}}
+
 
     steps:
       - name: Checkout repository
@@ -32,9 +31,6 @@ jobs:
       - name: Install frontend dependencies
         working-directory: "./Web2-master/reactms1"
         run: npm ci
-
-      - name: Set up environment variables
-        run: echo "MONGODB_CONNECTION_STRING=${MONGODB_CONNECTION_STRING}" >> $GITHUB_ENV
 
       - name: Start backend server
         working-directory: "./Web2-master/Übung 1/Meilenstein 3"
@@ -59,15 +55,8 @@ jobs:
         run: npm ci
 
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install --with-deps chromium
 
       - name: Run Playwright tests
         working-directory: "./Test-Environment"
-        run: npm run test
-
-      - uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30  
+        run: npx playwright test
