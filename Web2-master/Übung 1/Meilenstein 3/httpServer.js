@@ -77,8 +77,8 @@ const server = https.createServer({ key: key, cert: cert }, app);
 
 // app.get('/', (req, res) => { res.send('this is an secure server') })
 
-app.listen(80, () => {
-    console.log("Http app listening on port https://localhost/80");
+app.listen(8080, () => {
+    console.log("Http app listening on port https://localhost/8080");
 })
 
 // App Start
