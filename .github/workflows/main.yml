@@ -18,18 +18,18 @@ jobs:
         run: npm ci
         
       - name: Install frontend dependencies
-        working-directory: "Web3/Web2-master/reactms1"
+        working-directory: "./Web2-master/reactms1"
         run: npm ci
       
       - name: Set up environment variables
         run: echo "MONGODB_CONNECTION_STRING=${MONGODB_CONNECTION_STRING}" >> $GITHUB_ENV
 
       - name: Start backend server
-        working-directory: "Web3/Web2-master/Übung 1/Meilenstein 3"
+        working-directory: "./Web2-master/Übung 1/Meilenstein 3"
         run: npm start &
         
       - name: Start frontend server
-        working-directory: "Web3/Web2-master/reactms1"
+        working-directory: "./Web2-master/reactms1"
         run: npm start &
         
       - name: Wait for server to start
@@ -43,11 +43,11 @@ jobs:
           done
           
       - name: Install Playwright dependencies
-        working-directory: "Web3/Test-Environment"
+        working-directory: "./Test-Environment"
         run: npm ci
         
       - name: Run Playwright tests
-        working-directory: "Web3/Test-Environment"
+        working-directory: "./Test-Environment"
         run: npm run test
         
       
