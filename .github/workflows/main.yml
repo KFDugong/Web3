@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  test: 
+    runs-on: ubuntu-latest
+    env:
+      MONGODB_CONNECTION_STRING: ${{ secrets.MONGODB_CONNECTION_STRING}}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Install backend dependencies
+        working-directory: "./Web2-master/Übung 1/Meilenstein 3"
+        run: npm ci
+        
+      - name: Install frontend dependencies
+        working-directory: "./Web2-master/reactms1"
+        run: npm ci
+      
+      - name: Set up environment variables
+        run: echo "MONGODB_CONNECTION_STRING=${MONGODB_CONNECTION_STRING}" >> $GITHUB_ENV
+
+      - name: Start backend server
+        working-directory: "./Web2-master/Übung 1/Meilenstein 3"
+        run: npm start &
+        
+      - name: Start frontend server
+        working-directory: "./Web2-master/reactms1"
+        run: npm start &
+        
+      - name: Wait for server to start
+        run: |
+          server_up() {
+            curl -s http://localhost:3000 > /dev/null
+          }
+          until server_up; do
+            echo "Waiting for server to start..."
+            sleep 5
+          done
+          
+      - name: Install Playwright dependencies
+        working-directory: "./Test-Environment"
+        run: npm ci
+        
+      - name: Run Playwright tests
+        working-directory: "./Test-Environment"
+        run: npm run test
+        
+      
+      
+      
+      
+      
