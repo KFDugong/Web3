@@ -23,7 +23,7 @@ jobs:
           sudo apt-get install -y mongodb-org
 
       - name: Start MongoDB
-        run: sudo systemctl start mongodb
+        run: sudo mongod --fork --logpath /var/log/mongodb.log --dbpath /var/lib/mongodb
 
       - name: Install backend dependencies
         working-directory: "./Web2-master/Übung 1/Meilenstein 3"
