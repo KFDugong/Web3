@@ -28,11 +28,11 @@ jobs:
 
       - name: Start backend server
         working-directory: "./Web2-master/Übung 1/Meilenstein 3"
-        run: npm start &
+        run: sudo npm start &
 
       - name: Start frontend server
         working-directory: "./Web2-master/reactms1"
-        run: npm start &
+        run: sudo npm start &
         
       - name: Wait for servers to start
         run: |
@@ -46,32 +46,6 @@ jobs:
             echo "Waiting for servers to start..."
             sleep 5
           done
-
-      - name: Install Nginx
-        run: sudo apt-get update && sudo apt-get install nginx -y
-
-      - name: Configure Nginx
-        run: |
-          sudo bash -c "cat > /etc/nginx/sites-available/myapp <<EOF
-          server {
-              listen 80;
-              listen [::]:80;
-              server_name localhost;
-
-              location / {
-                  proxy_pass http://localhost:8080;
-                  proxy_set_header Host $host;
-                  proxy_set_header X-Real-IP $remote_addr;
-              }
-          }
-          EOF"
-          sudo ln -s /etc/nginx/sites-available/myapp /etc/nginx/sites-enabled/
-
-      - name: Restart Nginx
-        run: sudo service nginx restart
-
-      - name: Wait for Nginx to start
-        run: sleep 5s
         
       - name: Install Playwright dependencies
         working-directory: "./Test-Environment"
