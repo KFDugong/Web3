@@ -6,8 +6,8 @@ const envCredentials = {
 };
 
 // Vorerst http anstatt https. Weitere Konfiguration nötig, um die SSL Meldung zu umgehen.
-// const localURL = process.env.BASE_URL;
-const localURL = "http://localhost:3000"
+const localURL = process.env.BASE_URL;
+// const localURL = "http://localhost:3000"
 
 // SSL_UNKOWN_ERROR durch das Zertifikatsprobleme, die von Playwright schwierig abgedeckt werden.
 export async function login(page = Page, credentials = envCredentials) {

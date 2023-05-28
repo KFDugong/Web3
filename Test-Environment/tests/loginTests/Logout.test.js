@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { login } from "../../utils/actions";
 
-test("Login as default user: admin", async ({ page }) => {
+test("Logout as default user: admin", async ({ page }) => {
   await login(page);
   const welcomeMessage = page.locator("h1");
   await expect(welcomeMessage).toHaveText(
