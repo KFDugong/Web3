@@ -84,7 +84,6 @@ function MyVerticallyCenteredModal(props) {
 
 function EditButton(props) {
   const [modalShow, setModalShow] = useState(false)
-  console.log(props.application);
   return (
     <div>
       <Button

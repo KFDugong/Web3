@@ -12,7 +12,7 @@ require('dotenv').config();
  */
 module.exports = defineConfig({
   testDir: './tests',
-  timeout: 20 * 1000,
+  timeout: 10 * 1000,
   expect: {
     timeout: 1000,
   },
@@ -21,7 +21,7 @@ module.exports = defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 4 : 0,
+  retries: process.env.CI ? 1 : 1,
   /* Opt out of parallel tests on CI. */
   workers: 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -32,8 +32,8 @@ module.exports = defineConfig({
     // baseURL: 'http://127.0.0.1:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'retain-on-failure',
-    headless: false,
+    trace: 'on',
+    headless: true,
     ignoreHTTPSErrors: true,
     launchOptions: {
       args: [

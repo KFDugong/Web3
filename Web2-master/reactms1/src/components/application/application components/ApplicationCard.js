@@ -7,12 +7,12 @@ import EditApplicationButton from './EditApplicationButton';
 
 function ApplicationCard(props) {
   const isAdmin = jwtDecode(props.token).isAdministrator;
+  console.log(props);
   let applicationList = props.applicationList;
 
   const [idVisible, setIDVisible] = useState(true)
   let appID;
   idVisible ? appID = "DegreeCourseApplicationManagementPageListComponent" : appID = "";
-  console.log(props);
 
   return (
 

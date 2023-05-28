@@ -54,6 +54,7 @@ router.get("/:id", authUtil.verifyToken, function (req, res, next) {
 
 router.post("/", authUtil.verifyUserToken, function (req, res, next) {
     const username = authService.getUserIDFromToken(req.headers["authorization"])
+    
     const body = req.body
     degreeCourseApplicationService.createDGApp(username, body, function (err, result) {
         if (err) {

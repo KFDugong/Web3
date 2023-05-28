@@ -60,7 +60,6 @@ function DeleteButton(props) {
   const [modalShow, setModalShow] = useState(false)
   const buttonID = "DegreeCourseApplicationItemDeleteButton" + props.application.degreeCourseName + props.application.targetPeriodYear;
   const dialogID = "DeleteDialogDegreeCourseApplication" + props.applicationID;
-  console.log(props.application)
   return (
       <div>
           <Button

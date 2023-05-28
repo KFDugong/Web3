@@ -24,7 +24,7 @@ async function createSessionToken(loginCredentials, callback) {
                 const jwtKey = config.get("authentication").tokenKey
                 const jwtTime = config.get("authentication").defaultTime
 
-                let token = jwt.sign({ "username": result.userID, "isAdministrator": result.isAdministrator }, jwtKey, {
+                let token = jwt.sign({ "userID": result.userID, "isAdministrator": result.isAdministrator }, jwtKey, {
                     algorithm: "HS256",
                     expiresIn: jwtTime
                 })
@@ -44,8 +44,7 @@ function getUserIDFromToken(loginCredentials) {
     }
     const token = loginCredentials.split(" ")[1]
     const payloadInfo = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString())
-    const username = payloadInfo.username
-    // console.log(credentials)
+    const username = payloadInfo.userID
     return username  
 }
 

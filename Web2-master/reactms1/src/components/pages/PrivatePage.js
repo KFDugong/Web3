@@ -16,7 +16,6 @@ function PrivatePage(props) {
         userID = ""
     }
 
-
     return (
         <div className='page-layout' id='StartPage'>
             <div className='top-menu'>
