@@ -4,11 +4,13 @@ on:
   push:
     branches:
       - master
+
 jobs:
   test: 
     runs-on: ubuntu-latest
     env:
       MONGODB_CONNECTION_STRING: ${{ secrets.MONGODB_CONNECTION_STRING}}
+      
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -27,21 +29,50 @@ jobs:
       - name: Start backend server
         working-directory: "./Web2-master/Übung 1/Meilenstein 3"
         run: npm start &
-        
+
       - name: Start frontend server
         working-directory: "./Web2-master/reactms1"
         run: npm start &
         
-      - name: Wait for server to start
+      - name: Wait for servers to start
         run: |
-          server_up() {
+          backend_up() {
+            curl -s http://localhost:8080 > /dev/null
+          }
+          frontend_up() {
             curl -s http://localhost:3000 > /dev/null
           }
-          until server_up; do
-            echo "Waiting for server to start..."
+          until backend_up && frontend_up; do
+            echo "Waiting for servers to start..."
             sleep 5
           done
-          
+
+      - name: Install Nginx
+        run: sudo apt-get update && sudo apt-get install nginx -y
+
+      - name: Configure Nginx
+        run: |
+          sudo bash -c "cat > /etc/nginx/sites-available/myapp <<EOF
+          server {
+              listen 80;
+              listen [::]:80;
+              server_name localhost;
+
+              location / {
+                  proxy_pass http://localhost:8080;
+                  proxy_set_header Host $host;
+                  proxy_set_header X-Real-IP $remote_addr;
+              }
+          }
+          EOF"
+          sudo ln -s /etc/nginx/sites-available/myapp /etc/nginx/sites-enabled/
+
+      - name: Restart Nginx
+        run: sudo service nginx restart
+
+      - name: Wait for Nginx to start
+        run: sleep 5s
+        
       - name: Install Playwright dependencies
         working-directory: "./Test-Environment"
         run: npm ci
@@ -49,9 +80,3 @@ jobs:
       - name: Run Playwright tests
         working-directory: "./Test-Environment"
         run: npm run test
-        
-      
-      
-      
-      
-      

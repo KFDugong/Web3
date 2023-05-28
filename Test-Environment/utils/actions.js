@@ -1,8 +1,8 @@
 import { Page } from "@playwright/test";
 
 const envCredentials = {
-  username: process.env.ADMIN_LOGIN_USERNAME || "admin",
-  password: process.env.ADMIN_LOGIN_PASSWORD || "123",
+  username: process.env.ADMIN_LOGIN_USERNAME || "",
+  password: process.env.ADMIN_LOGIN_PASSWORD || "",
 };
 
 // Vorerst http anstatt https. Weitere Konfiguration nötig, um die SSL Meldung zu umgehen.

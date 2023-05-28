@@ -77,12 +77,12 @@ const server = https.createServer({ key: key, cert: cert }, app);
 
 // app.get('/', (req, res) => { res.send('this is an secure server') })
 
-app.listen(8080, () => {
+app.listen(80, () => {
     console.log("Http app listening on port https://localhost/8080");
 })
 
 // App Start
-const port = 8443
+const port = 443
 server.listen(port, () => {
     console.log(`Example app listening on port https://localhost:${port}`)
     console.log(new Date().toISOString())
