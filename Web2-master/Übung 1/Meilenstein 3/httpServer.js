@@ -82,7 +82,7 @@ app.listen(8080, () => {
 })
 
 // App Start
-const port = 443
+const port = 8443
 server.listen(port, () => {
     console.log(`Example app listening on port https://localhost:${port}`)
     console.log(new Date().toISOString())
