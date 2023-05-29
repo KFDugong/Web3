@@ -9,7 +9,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -40,7 +39,7 @@ jobs:
         working-directory: "./Web2-master/reactms1"
         run: sudo npm start &
 
-      - name: Wait for servers to start
+      - name: Wait for frontend server to start
         run: |
           frontend_up() {
             curl -s http://localhost:3000 > /dev/null
@@ -60,3 +59,10 @@ jobs:
       - name: Run Playwright tests
         working-directory: "./Test-Environment"
         run: npx playwright test
+
+      - name: Upload test artifacts
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results
+          path: ./Test-Environment/results
