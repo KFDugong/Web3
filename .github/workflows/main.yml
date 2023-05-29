@@ -60,9 +60,9 @@ jobs:
         working-directory: "./Test-Environment"
         run: npx playwright test
 
-      - name: Upload test artifacts
-        if: ${{ failure() }}
+      - name: Upload test results
+        if: always()
         uses: actions/upload-artifact@v2
         with:
-          name: test-results
-          path: ./Test-Environment/results
+          name: playwright-report
+          path: test-results
