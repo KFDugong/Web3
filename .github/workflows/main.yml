@@ -20,8 +20,21 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y mongodb-org
 
+      - name: Restart CI Container
+        uses: styfle/restart-container-action@v0.1.0
+
       - name: Start MongoDB
         run: sudo mongod --fork --logpath /var/log/mongodb.log --dbpath /var/lib/mongodb
+
+      - name: Wait for MongoDB to start
+        run: |
+          mongodb_up() {
+            mongo --eval "quit(db.runCommand({ ping: 1 }).ok ? 0 : 1)" > /dev/null
+          }
+          until mongodb_up; do
+            echo "Waiting for MongoDB to start..."
+            sleep 5
+          done
 
       - name: Install backend dependencies
         working-directory: "./Web2-master/Übung 1/Meilenstein 3"
@@ -34,6 +47,16 @@ jobs:
       - name: Start backend server
         working-directory: "./Web2-master/Übung 1/Meilenstein 3"
         run: sudo npm start &
+
+      - name: Wait for backend server to start
+        run: |
+          backend_up() {
+            curl -s https://localhost:443 > /dev/null
+          }
+          until backend_up; do
+            echo "Waiting for the backend server to start..."
+            sleep 5
+          done
 
       - name: Start frontend server
         working-directory: "./Web2-master/reactms1"
