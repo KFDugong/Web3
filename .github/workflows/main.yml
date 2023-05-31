@@ -20,9 +20,6 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y mongodb-org
 
-      - name: Restart CI Container
-        uses: styfle/restart-container-action@v0.1.0
-
       - name: Start MongoDB
         run: sudo mongod --fork --logpath /var/log/mongodb.log --dbpath /var/lib/mongodb
 
