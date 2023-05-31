@@ -48,7 +48,7 @@ jobs:
       - name: Wait for backend server to start
         run: |
           backend_up() {
-            curl -s https://localhost:443 > /dev/null
+            curl -s http://localhost:80 > /dev/null
           }
           until backend_up; do
             echo "Waiting for the backend server to start..."
