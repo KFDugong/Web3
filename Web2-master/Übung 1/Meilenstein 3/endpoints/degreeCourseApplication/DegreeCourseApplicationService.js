@@ -206,8 +206,6 @@ const checktargetPeriodShortName = function (targetPeriodShortName) {
 };
 // Create One
 function createDGApp(username, body, callback) {
-  console.log(username);
-  console.log(body);
   if (!username || !body) {
     return callback("Missing crucial information.", null);
   }
@@ -278,7 +276,6 @@ function createDGApp(username, body, callback) {
                   targetPeriodYear: application.targetPeriodYear,
                   targetPeriodShortName: application.targetPeriodShortName,
                 };
-                console.log(mappedResult);
                 return callback(null, mappedResult);
               } catch (e) {
                 return callback(e, null);
