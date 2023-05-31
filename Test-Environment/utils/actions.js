@@ -1,4 +1,4 @@
-import { Page } from "@playwright/test";
+import { Page, expect } from "@playwright/test";
 
 const envCredentials = {
   username: process.env.ADMIN_LOGIN_USERNAME || "",
@@ -19,6 +19,8 @@ export async function login(page = Page, credentials = envCredentials) {
   await page.locator("#LoginDialogPasswordText").click();
   await page.locator("#LoginDialogPasswordText").fill(credentials.password);
   await page.locator("#PerformLoginButton").click();
+  await expect(page.locator("#StartPage")).toBeVisible();
+  await page.locator('#StartPage').waitFor();
 }
 
 export async function createUser(page = Page, userData) {
