@@ -19,7 +19,7 @@ export async function login(page = Page, credentials = envCredentials) {
   await page.locator("#LoginDialogPasswordText").click();
   await page.locator("#LoginDialogPasswordText").fill(credentials.password);
   await page.locator("#PerformLoginButton").click();
-  await page.waitForNavigation();
+  await page.waitForLoadState();
 }
 
 export async function createUser(page = Page, userData) {
