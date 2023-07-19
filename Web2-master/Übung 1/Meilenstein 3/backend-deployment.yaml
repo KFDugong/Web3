@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rest-server-deployment
+  namespace: pwa-kkuang
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rest-server
+  template:
+    metadata:
+      labels:
+        app: rest-server
+    spec:
+      containers:
+      - name: rest-server-container
+        image: rest-server-image:latest
+        ports:
+        - containerPort: 80
+        env:
+          - name: MONGODB_URI
+            value: mongodb://mongo:27017/TestDB
