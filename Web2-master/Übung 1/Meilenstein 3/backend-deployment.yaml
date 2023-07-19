@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: rest-server-container
-        image: rest-server-image:latest
+        image: kfdkelvin/rest-server-image:latest
         ports:
         - containerPort: 80
         env:
